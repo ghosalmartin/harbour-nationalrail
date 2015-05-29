@@ -42,7 +42,8 @@
 #include <QQmlContext>
 #include <QtQml/qqml.h>
 #include <StationsFilterModel.h>
-
+#include <QFile>
+#include <QDir>
 int main(int argc, char *argv[])
 {
 
@@ -50,6 +51,14 @@ int main(int argc, char *argv[])
 
     app->setOrganizationName("harbour-nationalrail");
     app->setApplicationName("harbour-nationalrail");
+
+    if(!QFile::exists("/home/user/.harbour-nationalrail/stationsDB.sqlite")){
+        QDir dir;
+        dir.mkpath("/home/user/.harbour-nationalrail/");
+        bool res = QFile::copy("/usr/share/harbour-nationalrail/data/stationsDB.sqlite","/home/user/.harbour-nationalrail/");
+        qDebug() << "Database does not exist, copying...";
+        qDebug() << res;
+    }
 
     NetworkRequest nr;
     ServiceModel servicemodel;

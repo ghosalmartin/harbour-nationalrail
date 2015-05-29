@@ -15,7 +15,7 @@ TARGET = harbour-nationalrail
 CONFIG += sailfishapp
 
 database.files = database/stationsDB.sqlite
-database.path = /home/nemo/.NationalRail
+database.path = /usr/share/harbour-nationalrail/data
 INSTALLS += database
 
 

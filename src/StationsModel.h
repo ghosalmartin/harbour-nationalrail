@@ -12,6 +12,7 @@ public:
     explicit StationsModel();
 
     enum Roles {
+            idRole = Qt::UserRole,
             stationRole = Qt::UserRole + 1,
             favouritedRole = Qt::UserRole + 2,
     };

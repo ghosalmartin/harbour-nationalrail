@@ -74,9 +74,9 @@ Dialog {
                 IconButton {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    //icon.source: model.favourited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                    icon.source: model.favourited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
                     onClicked: {
-                        //favorited = !favorited;
+                        model.favorited = !model.favorited;
                     }
                     highlighted: down
                 }
@@ -88,7 +88,6 @@ Dialog {
                 }
 
                 onClicked:selectItem();
-
 
             }
 

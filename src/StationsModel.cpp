@@ -11,6 +11,7 @@ StationsModel::StationsModel() :
     DatabaseOperations dbOp(database.getDB());
     _data = dbOp.getAllStations();
 
+    _roles[idRole] = "id";
     _roles[stationRole] = "station";
     _roles[favouritedRole] = "favourited";
 }
@@ -27,6 +28,7 @@ QVariant StationsModel::data(const QModelIndex &index, int role) const
     StationObject stationObject = _data.at(row);
     switch (role)
     {
+    case idRole: return stationObject.getID();
     case stationRole : return stationObject.getStation();
     case favouritedRole : return stationObject.getFavorited();
     default: return QVariant();
