@@ -44,6 +44,8 @@
 #include <StationsFilterModel.h>
 #include <QFile>
 #include <QDir>
+#include <QStandardPaths>
+
 int main(int argc, char *argv[])
 {
 
@@ -52,12 +54,17 @@ int main(int argc, char *argv[])
     app->setOrganizationName("harbour-nationalrail");
     app->setApplicationName("harbour-nationalrail");
 
-    if(!QFile::exists("/home/user/.harbour-nationalrail/stationsDB.sqlite")){
+
+
+    QDir appDir(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).back());
+    QString dbName = "stationsDB.sqlite";
+    QString dbFolder = "."+app->applicationName();
+
+    if(!QFile::exists(QDir::homePath()+QDir::separator()+dbFolder+QDir::separator()+dbName)){
         QDir dir;
-        dir.mkpath("/home/user/.harbour-nationalrail/");
-        bool res = QFile::copy("/usr/share/harbour-nationalrail/data/stationsDB.sqlite","/home/user/.harbour-nationalrail/");
+        dir.mkpath(QDir::homePath()+QDir::separator()+dbFolder);
+        QFile::copy(appDir.path() + QDir::separator() + app->applicationName() + QDir::separator() + "data" +QDir::separator() + dbName,QDir::homePath()+QDir::separator()+dbFolder+QDir::separator()+dbName);
         qDebug() << "Database does not exist, copying...";
-        qDebug() << res;
     }
 
     NetworkRequest nr;
