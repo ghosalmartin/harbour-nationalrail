@@ -4,6 +4,7 @@
 #include <QAbstractListModel>
 #include <QHash>
 #include <StationObject.h>
+#include <Database.h>
 
 class StationsModel : public QAbstractListModel
 {
@@ -14,17 +15,20 @@ public:
     enum Roles {
             idRole = Qt::UserRole,
             stationRole = Qt::UserRole + 1,
-            favouritedRole = Qt::UserRole + 2,
+            favoritedRole = Qt::UserRole + 2,
     };
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const { return _roles; }
     void appendRow(StationObject station);
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
 
 private:
     QList<StationObject> _data;
     QHash<int, QByteArray> _roles;
+    Database database;
+
 
 signals:
 

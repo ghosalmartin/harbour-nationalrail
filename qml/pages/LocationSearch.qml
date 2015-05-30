@@ -16,6 +16,8 @@ Dialog {
         sourceComponent: listViewComponent
     }
 
+
+
     Column {
         id: headerContainer
 
@@ -62,8 +64,10 @@ Dialog {
                 }
 
                 Label {
-                    x: searchField.textLeftMargin
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
                     anchors.verticalCenter: parent.verticalCenter
+
                     color: searchString.length > 0 ? (highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor)
                                                    : (highlighted ? Theme.highlightColor : Theme.primaryColor)
                     textFormat: Text.StyledText
@@ -74,11 +78,11 @@ Dialog {
                 IconButton {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    icon.source: model.favourited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                    icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
                     onClicked: {
                         model.favorited = !model.favorited;
                     }
-                    highlighted: down
+                    highlighted: down || backgroundItem.highlighted
                 }
 
                 function selectItem(){

@@ -1,8 +1,8 @@
 #include "database.h"
 
 #include <QDir>
-
-QString const databaseFolder ="/home/nemo/.harbour-nationalrail/";
+#include <QDebug>
+QString const databaseFolder =".harbour-nationalrail";
 QString const databaseName ="stationsDB.sqlite";
 
 Database::Database()
@@ -21,7 +21,7 @@ bool Database::openDB()
     db = QSqlDatabase::addDatabase("QSQLITE");
 
 
-    QString databasePath = databaseFolder + "/" + databaseName;
+    QString databasePath = QDir::homePath() + QDir::separator()+ databaseFolder + QDir::separator()+ databaseName;
 
     db.setDatabaseName(databasePath);
 

@@ -8,9 +8,10 @@ class DatabaseOperations
 {
 
 public:
-    DatabaseOperations(QSqlDatabase m_db);
+    DatabaseOperations(QSqlDatabase);
     QList<StationObject> getAllStations();
-    Q_INVOKABLE void updateFavourite(int favourite, int row);
+    QList<StationObject> getAllFavouriteStations();
+    void updateFavourite(bool favourite, int row);
 private:
     QSqlDatabase m_db;
 };

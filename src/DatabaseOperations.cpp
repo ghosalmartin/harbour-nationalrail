@@ -4,9 +4,8 @@
 #include <QSqlResult>
 #include <QDebug>
 
-DatabaseOperations::DatabaseOperations(QSqlDatabase db): m_db(db)
+DatabaseOperations::DatabaseOperations(QSqlDatabase database):m_db(database)
 {
-
 }
 
 QList<StationObject> DatabaseOperations::getAllStations(){
@@ -23,16 +22,23 @@ QList<StationObject> DatabaseOperations::getAllStations(){
     return stations;
 }
 
-void DatabaseOperations::updateFavourite(int favourite, int row){
+void DatabaseOperations::updateFavourite(bool favourite, int id){
+    QSqlQuery query(m_db);
+    QString sql = QString("UPDATE stations SET favourite=%1 WHERE id=%2;").arg(favourite).arg(id);
+    query.exec(sql);
+}
+
+QList<StationObject> DatabaseOperations::getAllFavouriteStations(){
 
     QSqlQuery query(m_db);
-    QString sql = "UPDATE stations SET favourited=";
-    sql.append(favourite);
-    sql.append(" WHERE id=");
-    sql.append(row);
-    qDebug() << sql;
-    //query.exec(sql);
+    QList<StationObject> stations;
+    query.exec("SELECT * FROM stations WHERE favourite=1");
 
+    while(query.next()){
+        StationObject station(query.value(0).toInt(0),query.value(1).toString(),query.value(2).toBool());
+        stations.append(station);
+    }
 
+    return stations;
 }
 
