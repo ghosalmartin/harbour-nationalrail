@@ -16,13 +16,13 @@ Q_OBJECT
 
 public:
     NetworkRequest();
-    Q_INVOKABLE void sendRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
-    void processReply();
+    Q_INVOKABLE void sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
+    void processXYZReply();
     ServiceModel getModel();
     QDomDocument xmlDoc;
 
 public slots:
-    void replyFinished(QNetworkReply *reply);
+    void XYZReplyFinished(QNetworkReply *reply);
 
 signals:
      void dataProcessed(QList<ServiceObject> services);

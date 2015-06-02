@@ -17,11 +17,13 @@ public:
             destinationRole = Qt::UserRole + 3,
             destinationCRSRole = Qt::UserRole + 4,
             departureTimeRole = Qt::UserRole + 5,
-            amendedTimeRole = Qt::UserRole + 6,
-            platformRole = Qt::UserRole + 7,
-            operatorRole = Qt::UserRole + 8,
-            operatorCodeRole = Qt::UserRole + 9,
-            serviceIDRole = Qt::UserRole + 10,
+            amendedDepartureTimeRole = Qt::UserRole + 6,
+            arrivalTimeRole = Qt::UserRole +7,
+            amendedArrivalTimeRole = Qt::UserRole + 8,
+            platformRole = Qt::UserRole + 9,
+            operatorRole = Qt::UserRole + 10,
+            operatorCodeRole = Qt::UserRole + 11,
+            serviceIDRole = Qt::UserRole + 12,
     };
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

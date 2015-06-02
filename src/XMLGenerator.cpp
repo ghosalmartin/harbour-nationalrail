@@ -3,7 +3,7 @@
 #include <QXmlStreamWriter>
 #include <QBuffer>
 
-QByteArray XMLGenerator::createXML(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow){
+QByteArray XMLGenerator::createOperationXML(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow){
 
     QString key = "8650ba70-f8e8-4c44-af6f-49b1a9cc697c";
 

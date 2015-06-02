@@ -7,7 +7,7 @@ class XMLGenerator
 {
 
 public:
-    QByteArray createXML(QString operation, int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
+    QByteArray createOperationXML(QString operation, int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
     QByteArray createServiceDetailXML(QString serviceID);
 };
 

@@ -9,13 +9,14 @@ ServiceModel::ServiceModel() : QAbstractListModel()
     roles_[destinationRole] = "destination";
     roles_[destinationCRSRole] = "destinationCRS";
     roles_[departureTimeRole] = "departureTime";
-    roles_[amendedTimeRole] = "amendedTime";
+    roles_[amendedDepartureTimeRole] = "amendedDepartureTime";
+    roles_[arrivalTimeRole] = "arrivalTime";
+    roles_[amendedArrivalTimeRole] = "amendedArrivalTime";
     roles_[platformRole] = "platform";
     roles_[operatorRole] ="operator";
     roles_[operatorCodeRole] = "operatorCode";
     roles_[serviceIDRole] = "serviceID";
 }
-
 
 int ServiceModel::rowCount(const QModelIndex &) const
 {
@@ -36,7 +37,9 @@ QVariant ServiceModel::data(const QModelIndex &index, int role) const
     case destinationRole: return serviceObject.getDestination();
     case destinationCRSRole : return serviceObject.getDestinationCRS();
     case departureTimeRole : return serviceObject.getDepartureTime();
-    case amendedTimeRole : return serviceObject.getAmendedTime();
+    case amendedDepartureTimeRole : return serviceObject.getAmendedDepartureTime();
+    case arrivalTimeRole : return serviceObject.getArrivalTime();
+    case amendedArrivalTimeRole : return serviceObject.getAmendedArrivalTime();
     case platformRole : return serviceObject.getPlatform();
     case operatorRole : return serviceObject.getTrainOperator();
     case operatorCodeRole : return serviceObject.getOperatorCode();
@@ -60,8 +63,14 @@ void ServiceModel::appendRow(ServiceObject service)
 
 void ServiceModel::populateModel(QList<ServiceObject> services){
 
+    beginResetModel();
+
+    data_.clear();
+
     QListIterator<ServiceObject> iterator(services);
     while(iterator.hasNext()){
         appendRow(iterator.next());
     }
+
+    endResetModel();
 }

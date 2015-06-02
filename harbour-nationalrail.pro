@@ -39,14 +39,14 @@ OTHER_FILES += \
     rpm/harbour-nationalrail.spec \
     rpm/harbour-nationalrail.yaml \
     translations/*.ts \
-    qml/pages/Test.qml \
     qml/pages/Search.qml \
     qml/pages/LocationSearch.qml \
     qml/pages/Home.qml \
     database/stationsData.sql \
     database/stationsDB.sqlite \
     harbour-nationalrail.desktop \
-    qml/harbour-nationalrail.qml
+    qml/harbour-nationalrail.qml \
+    qml/pages/SearchResults.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

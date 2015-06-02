@@ -7,13 +7,15 @@ class ServiceObject
 {
 
 public:
-    explicit ServiceObject(QString, QString, QString, QString,QString,QString, QString, QString, QString,QString);
+    explicit ServiceObject(QString, QString, QString, QString,QString,QString, QString, QString, QString,QString,QString, QString);
     QString getStationName();
     QString getStationCRS();
     QString getDestination();
     QString getDestinationCRS();
     QString getDepartureTime();
-    QString getAmendedTime();
+    QString getAmendedDepartureTime();
+    QString getArrivalTime();
+    QString getAmendedArrivalTime();
     QString getPlatform();
     QString getTrainOperator();
     QString getOperatorCode();
@@ -26,7 +28,9 @@ private:
     QString m_destination;
     QString m_destinationCRS;
     QString m_departureTime;
-    QString m_amendedTime;
+    QString m_amendedDepartureTime;
+    QString m_arrivalTime;
+    QString m_amendedArrivalTime;
     QString m_platform;
     QString m_operator;
     QString m_operatorCode;
