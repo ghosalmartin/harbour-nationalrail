@@ -14,44 +14,97 @@ Dialog{
     property string fromto;
     property string timeOffset;
     property string timeWindow;
-
-
+    property string arrivaldeparture;
 
     SilicaListView{
 
-        header:   PageHeader {
-            title: "Results"
+        PullDownMenu {
+            MenuItem {
+                text: "Refresh"
+                onClicked: networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+            }
         }
 
-
+        header:   PageHeader {
+            id:header
+            title: {
+                if(method == "GetDepartureBoard"){
+                    header.title="Departures"
+                }else{
+                    header.title="Arrivals"
+                }
+            }
+        }
 
         anchors.fill: parent
         currentIndex: -1
 
         model: serviceModel
         delegate: BackgroundItem {
+
             width: ListView.view.width
             height: Theme.itemSizeSmall
 
             Label {
-                text: destination
+                id:locationLabel
+                text: {
+                    if(method == "GetDepartureBoard"){
+                        locationLabel.text=model.destination
+                    }else{
+                        locationLabel.text=model.stationName
+                    }
+
+                }
+                anchors.top: parent.top
+                anchors.left: parent.left
             }
 
             Label {
                 id: platformLabel
-                text: {"Platform: "+platform }
+                text:{
+                    if(model.platform ===""){
+                        platformLabel.text ="Platform: -"
+                    }else{
+                        platformLabel.text="Platform: "+ model.platform
+                    }
+                }
                 font.pixelSize: Theme.fontSizeExtraSmall
-                anchors.right: parent.right
-               // anchors.baseline: parent.TopRight
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
             }
 
-//            Label {
-//                id: departureTimeLabel
-//                text: {"Departure Time: "+departureTime }
-//                font.pixelSize: Theme.fontSizeExtraSmall
-//                anchors.right: parent.right
-//                anchors.baseline: parent.Bottom
-//            }
+            Label {
+                id: textTimeLabel
+                text: {
+                    if(method == "GetDepartureBoard"){
+                        textTimeLabel.text ="Dep. Time: " + model.departureTime
+                    }else{
+                        textTimeLabel.text ="Arrival Time: " + model.arrivalTime
+                    }
+                }
+                font.pixelSize: Theme.fontSizeExtraSmall
+                anchors.right: parent.right
+                anchors.top: parent.top
+            }
+
+            Label {
+                id: amendedTimeLabel
+                text: {
+
+                    if(model.amendedDepartureTime === "" && model.amendedArrivalTime === "" ){
+                        amendedTimeLabel.text="Amended Time: -"
+                    }else{
+                        if(method == "GetDepartureBoard"){
+                            amendedTimeLabel.text ="Amended Time: " + model.amendedDepartureTime
+                        }else{
+                            amendedTimeLabel.text ="Amended Time: " + model.amendedArrivalTime
+                        }
+                    }
+                }
+                font.pixelSize: Theme.fontSizeExtraSmall
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
 
         VerticalScrollDecorator{}

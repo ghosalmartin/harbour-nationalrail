@@ -86,7 +86,7 @@ void NetworkRequest::processXYZReply(){
         QDomElement operatorCode = service.firstChildElement("operatorCode");
         QDomElement serviceID = service.firstChildElement("serviceID");
 
-        ServiceObject object(locationName.text(),locationCRS.text(), destinationName.text(),destinationCRS.text(), std.text(),etd.text(),sta.text(),etd.text(),platform.text(),trainOperator.text(),operatorCode.text(),serviceID.text());
+        ServiceObject object(locationName.text(),locationCRS.text(), destinationName.text(),destinationCRS.text(), std.text(),etd.text(),sta.text(),eta.text(),platform.text(),trainOperator.text(),operatorCode.text(),serviceID.text());
 
         m_services.append(object);
 
