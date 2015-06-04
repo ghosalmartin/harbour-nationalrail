@@ -36,7 +36,7 @@ void NetworkRequest::sendXYZRequest(QString operation,int numRows, QString CRS, 
     mgr->post(request, xml);
     connect(mgr, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(XYZReplyFinished(QNetworkReply*)));
-    eventLoop.exec();
+    eventLoop.exec();    
 }
 
 void NetworkRequest::XYZReplyFinished(QNetworkReply *reply){
@@ -94,6 +94,11 @@ void NetworkRequest::processXYZReply(){
 
     emit dataProcessed(m_services);
 }
+
+QList<ServiceObject> NetworkRequest::getServicesList(){
+    return m_services;
+}
+
 
 
 

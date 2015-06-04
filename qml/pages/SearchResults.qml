@@ -1,5 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import com.nationalrail.networkrequest 1.0
+import com.nationalrail.servicemodel 1.0
+import com.nationalrail.serviceobject 1.0
 
 Dialog{
     id:dialog
@@ -113,5 +116,17 @@ Dialog{
 
     Component.onCompleted: {
         networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+    }
+
+    NetworkRequest {
+     id:networkrequest
+     onDataProcessed:{
+        serviceModel.populateModel(networkrequest.getServicesList());
+     }
+    }
+
+    ServiceModel{
+     id:serviceModel
+
     }
 }

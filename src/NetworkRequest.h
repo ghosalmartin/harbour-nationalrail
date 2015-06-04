@@ -23,6 +23,7 @@ public:
 
 public slots:
     void XYZReplyFinished(QNetworkReply *reply);
+    QList<ServiceObject> getServicesList();
 
 signals:
      void dataProcessed(QList<ServiceObject> services);

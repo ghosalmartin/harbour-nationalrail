@@ -7,7 +7,7 @@ class ServiceObject
 {
 
 public:
-    explicit ServiceObject(QString, QString, QString, QString,QString,QString, QString, QString, QString,QString,QString, QString);
+    ServiceObject(QString, QString, QString, QString,QString,QString, QString, QString, QString,QString,QString, QString);
     QString getStationName();
     QString getStationCRS();
     QString getDestination();

@@ -1,6 +1,8 @@
 import QtQuick 2.1
 import Sailfish.Silica 1.0
 
+import com.nationalrail.stationsfiltermodel 1.0
+
 Dialog {
     id: searchDialog
     property string searchString: ""
@@ -105,5 +107,9 @@ Dialog {
                 stationsModel.filter = "";
             }
         }
+    }
+
+    StationsFilterModel{
+     id:stationsModel
     }
 }

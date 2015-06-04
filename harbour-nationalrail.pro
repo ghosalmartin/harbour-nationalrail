@@ -29,7 +29,8 @@ SOURCES += \
     src/Database.cpp \
     src/StationObject.cpp \
     src/DatabaseOperations.cpp \
-    src/harbour-nationalrail.cpp
+    src/harbour-nationalrail.cpp \
+    src/FavouritesModel.cpp
 
 INCLUDEPATH += src/ \
 
@@ -61,7 +62,8 @@ HEADERS += \
     src/StationsFilterModel.h \
     src/Database.h \
     src/StationObject.h \
-    src/DatabaseOperations.h
+    src/DatabaseOperations.h \
+    src/FavouritesModel.h
 
 QT+= core xml sql
 

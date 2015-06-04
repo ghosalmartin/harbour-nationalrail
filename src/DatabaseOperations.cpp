@@ -42,3 +42,5 @@ QList<StationObject> DatabaseOperations::getAllFavouriteStations(){
     return stations;
 }
 
+
+

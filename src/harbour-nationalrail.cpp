@@ -39,13 +39,16 @@
 #include <NetworkRequest.h>
 #include <XMLGenerator.h>
 #include <ServiceModel.h>
+#include <ServiceObject.h>
 #include <QQmlContext>
 #include <QtQml/qqml.h>
-#include <StationsFilterModel.h>
+
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
 
+#include <FavouritesModel.h>
+#include <StationsFilterModel.h>
 int main(int argc, char *argv[])
 {
 
@@ -67,19 +70,15 @@ int main(int argc, char *argv[])
         qDebug() << "Database does not exist, copying...";
     }
 
-    NetworkRequest nr;
-    ServiceModel servicemodel;
-    StationsFilterModel sfm;
 
-
-    QObject::connect(&nr, SIGNAL(dataProcessed(QList<ServiceObject>)),&servicemodel, SLOT(populateModel(QList<ServiceObject>)));
+    qmlRegisterType<NetworkRequest>("com.nationalrail.networkrequest", 1, 0, "NetworkRequest");
+    qmlRegisterType<ServiceModel>("com.nationalrail.servicemodel", 1, 0, "ServiceModel");
+    qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
+    qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
+    qmlRegisterUncreatableType<ServiceObject>("com.nationalrail.serviceobject", 1, 0, "ServiceObject", "");
+    //QObject::connect(&nr, SIGNAL(dataProcessed(QList<ServiceObject>)),&servicemodel, SLOT(populateModel(QList<ServiceObject>)));
 
     QQuickView *view = SailfishApp::createView();
-
-    view->rootContext()->setContextProperty("networkrequest",&nr);
-    view->rootContext()->setContextProperty("serviceModel", &servicemodel);
-    view->rootContext()->setContextProperty("stationsModel", &sfm);
-
 
     QString qml = QString("qml/%1.qml").arg("harbour-nationalrail");
     view->setSource(SailfishApp::pathTo(qml));

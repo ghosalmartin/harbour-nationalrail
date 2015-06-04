@@ -30,7 +30,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import com.nationalrail.favouritesmodel 1.0
 
 Page {
     id: page
@@ -55,19 +55,61 @@ Page {
 
             width: page.width
             spacing: Theme.paddingLarge
-            PageHeader {
-                title: "Favourites"
+
+
+            SilicaListView {
+                id:listview
+                model: favouritesModel
+                anchors.fill: parent
+                currentIndex: -1 // otherwise currentItem will steal focus
+                header: PageHeader {
+                    title: "Favourites"
+                }
+
+                delegate: BackgroundItem {
+                    id: backgroundItem
+
+                    ListView.onAdd: AddAnimation {
+                        target: backgroundItem
+                    }
+                    ListView.onRemove: RemoveAnimation {
+                        target: backgroundItem
+                    }
+
+                    Label {
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.paddingLarge
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                        textFormat: Text.StyledText
+                        text: model.station
+
+                    }
+
+                    IconButton {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                        onClicked: {
+                            model.favorited = !model.favorited;
+                        }
+                        highlighted: down || backgroundItem.highlighted
+                    }
+
+                    //onClicked:selectItem();
+
+                }
+
+                VerticalScrollDecorator {}
+
             }
-
-
         }
+
 
     }
 
-
-
-
-
-
+    FavouritesModel{
+     id:favouritesModel
+    }
 
 }
