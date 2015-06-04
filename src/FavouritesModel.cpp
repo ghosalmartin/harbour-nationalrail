@@ -1,10 +1,9 @@
 #include "FavouritesModel.h"
 #include "DatabaseOperations.h"
-
+#include <QDebug>
 FavouritesModel::FavouritesModel() : QAbstractListModel()
 {
-    DatabaseOperations dbOp;
-    _data = dbOp.getAllFavouriteStations();
+    retrieveData();
 
     _roles[idRole] = "id";
     _roles[stationRole] = "station";
@@ -38,14 +37,22 @@ bool FavouritesModel::setData(const QModelIndex &index, const QVariant &value, i
     case stationRole:
         return false;
     case favoritedRole: {
+        beginRemoveRows(index,index.row(),index.row());
         bool newVal = value.toBool();
-        _data[index.row()].setFavorited(newVal);
         DatabaseOperations dbOp;
         dbOp.updateFavourite(newVal, index.row()+1);
+        _data.removeAt(index.row());
+        retrieveData();
+        endRemoveRows();
         return true;
     }
     default:
         return false;
     }
+}
+
+void FavouritesModel::retrieveData(){
+    DatabaseOperations dbOp;
+    _data = dbOp.getAllFavouriteStations();
 }
 

@@ -49,67 +49,60 @@ Page {
             }
         }
 
-        Column{
+        SilicaListView {
+            id:listview
+            model: favouritesModel
+            anchors.fill: parent
+            currentIndex: -1 // otherwise currentItem will steal focus
+            header: PageHeader {
+                title: "Favourites"
+            }
 
-            id:favourites
+            delegate: BackgroundItem {
+                id: backgroundItem
 
-            width: page.width
-            spacing: Theme.paddingLarge
-
-
-            SilicaListView {
-                id:listview
-                model: favouritesModel
-                anchors.fill: parent
-                currentIndex: -1 // otherwise currentItem will steal focus
-                header: PageHeader {
-                    title: "Favourites"
+                ListView.onAdd: AddAnimation {
+                    target: backgroundItem
+                }
+                ListView.onRemove: RemoveAnimation {
+                    target: backgroundItem
                 }
 
-                delegate: BackgroundItem {
-                    id: backgroundItem
-
-                    ListView.onAdd: AddAnimation {
-                        target: backgroundItem
-                    }
-                    ListView.onRemove: RemoveAnimation {
-                        target: backgroundItem
-                    }
-
-                    Label {
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingLarge
-                        anchors.verticalCenter: parent.verticalCenter
-                        color: highlighted ? Theme.highlightColor : Theme.primaryColor
-                        textFormat: Text.StyledText
-                        text: model.station
-
-                    }
-
-                    IconButton {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.right: parent.right
-                        icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
-                        onClicked: {
-                            model.favorited = !model.favorited;
-                        }
-                        highlighted: down || backgroundItem.highlighted
-                    }
-
-                    //onClicked:selectItem();
+                Label {
+                    id: locationLabel
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                    textFormat: Text.StyledText
+                    text: model.station
 
                 }
 
-                VerticalScrollDecorator {}
+                IconButton {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                    onClicked: {
+                        model.favorited = !model.favorited;
+                    }
+                    highlighted: down || backgroundItem.highlighted
+                }
+
+                onClicked: {
+                    var location = locationLabel.text.split(" - ")[1];
+                    var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location })
+
+                }
 
             }
+
+            VerticalScrollDecorator {}
         }
-
-
     }
 
     FavouritesModel{
-     id:favouritesModel
+        id:favouritesModel
     }
 
 }

@@ -22,7 +22,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const { return _roles; }
     bool setData(const QModelIndex &index, const QVariant &value, int role);
-
+    void retrieveData();
 private:
     QList<StationObject> _data;
     QHash<int, QByteArray> _roles;
