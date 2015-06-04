@@ -4,8 +4,10 @@
 #include <QSqlResult>
 #include <QDebug>
 
-DatabaseOperations::DatabaseOperations(QSqlDatabase database):m_db(database)
+DatabaseOperations::DatabaseOperations()
 {
+    QSqlDatabase database = QSqlDatabase::database("stationsDB");
+    m_db = database;
 }
 
 QList<StationObject> DatabaseOperations::getAllStations(){

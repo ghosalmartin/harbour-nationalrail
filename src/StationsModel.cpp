@@ -7,7 +7,7 @@
 StationsModel::StationsModel() :
     QAbstractListModel()
 {
-    DatabaseOperations dbOp(database.getDB());
+    DatabaseOperations dbOp;
     _data = dbOp.getAllStations();
 
     _roles[idRole] = "id";
@@ -51,7 +51,7 @@ bool StationsModel::setData(const QModelIndex &index, const QVariant &value, int
     case favoritedRole: {
         bool newVal = value.toBool();
         _data[index.row()].setFavorited(newVal);
-        DatabaseOperations dbOp(database.getDB());
+        DatabaseOperations dbOp;
         dbOp.updateFavourite(newVal, index.row()+1);
         return true;
     }

@@ -10,7 +10,7 @@
 #include <XMLGenerator.h>
 #include <ServiceObject.h>
 
-NetworkRequest::NetworkRequest()
+NetworkRequest::NetworkRequest(QObject *parent) :  QObject(parent)
 {
 }
 

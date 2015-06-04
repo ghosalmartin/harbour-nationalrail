@@ -27,7 +27,6 @@ public:
 private:
     QList<StationObject> _data;
     QHash<int, QByteArray> _roles;
-    Database database;
 
 
 signals:

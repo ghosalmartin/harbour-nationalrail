@@ -5,6 +5,7 @@
 #include <QHash>
 #include <StationObject.h>
 #include <Database.h>
+
 class FavouritesModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -25,7 +26,7 @@ public:
 private:
     QList<StationObject> _data;
     QHash<int, QByteArray> _roles;
-    Database database;
+    //Database database;
 };
 
 #endif // FAVOURITESMODEL_H

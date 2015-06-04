@@ -32,7 +32,6 @@
 #include <QtQuick>
 #endif
 
-
 #include <sailfishapp.h>
 #include <QGuiApplication>
 #include <QQuickView>
@@ -70,13 +69,14 @@ int main(int argc, char *argv[])
         qDebug() << "Database does not exist, copying...";
     }
 
+    new Database;
+
+
 
     qmlRegisterType<NetworkRequest>("com.nationalrail.networkrequest", 1, 0, "NetworkRequest");
     qmlRegisterType<ServiceModel>("com.nationalrail.servicemodel", 1, 0, "ServiceModel");
     qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
     qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
-    qmlRegisterUncreatableType<ServiceObject>("com.nationalrail.serviceobject", 1, 0, "ServiceObject", "");
-    //QObject::connect(&nr, SIGNAL(dataProcessed(QList<ServiceObject>)),&servicemodel, SLOT(populateModel(QList<ServiceObject>)));
 
     QQuickView *view = SailfishApp::createView();
 

@@ -8,7 +8,7 @@ class DatabaseOperations
 {
 
 public:
-    DatabaseOperations(QSqlDatabase);
+    DatabaseOperations();
     QList<StationObject> getAllStations();
     QList<StationObject> getAllFavouriteStations();
     void updateFavourite(bool favourite, int row);

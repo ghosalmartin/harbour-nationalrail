@@ -1,24 +1,22 @@
-#ifndef QMLACCESSLAYER_H
-#define QMLACCESSLAYER_H
+#ifndef NETWORKREQUEST_H
+#define NETWORKREQUEST_H
 
 #include <QObject>
 #include <XMLGenerator.h>
 #include <QNetworkReply>
 #include <QEventLoop>
 #include <QDomDocument>
-#include <QQuickView>
-#include <ServiceModel.h>
+#include <ServiceObject.h>
 
 class NetworkRequest : public QObject
 {
 
-Q_OBJECT
+    Q_OBJECT
 
 public:
-    NetworkRequest();
+    NetworkRequest(QObject *parent = 0);
     Q_INVOKABLE void sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
     void processXYZReply();
-    ServiceModel getModel();
     QDomDocument xmlDoc;
 
 public slots:
@@ -34,4 +32,4 @@ private:
      QList<ServiceObject> m_services;
 };
 
-#endif // QMLACCESSLAYER_H
+#endif // NETWORKREQUEST_H

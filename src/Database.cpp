@@ -18,7 +18,7 @@ Database::~Database()
 bool Database::openDB()
 {
 
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QSQLITE","stationsDB");
 
 
     QString databasePath = QDir::homePath() + QDir::separator()+ databaseFolder + QDir::separator()+ databaseName;

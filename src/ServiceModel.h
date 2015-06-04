@@ -2,14 +2,16 @@
 #define SERVICEMODEL_H
 
 #include <QObject>
-#include <ServiceObject.h>
 #include <QAbstractListModel>
 
+#include <ServiceObject.h>
+#include <NetworkRequest.h>
 class ServiceModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(NetworkRequest * source READ getSource WRITE setSource NOTIFY sourceChanged)
 public:
-    explicit ServiceModel();
+    explicit ServiceModel(QObject *parent = 0);
 
     enum Roles {
             stationNameRole = Qt::UserRole + 1,
@@ -31,14 +33,18 @@ public:
     QHash<int, QByteArray> roleNames() const;
 
     void appendRow(ServiceObject service);
+    NetworkRequest *getSource () const { return m_networkRequest; }
+    void setSource(NetworkRequest *source);
 
 signals:
+    void sourceChanged();
 
 public slots:
     void populateModel(QList<ServiceObject> services);
 private:
     QList<ServiceObject> data_;
     QHash<int, QByteArray> roles_;
+    NetworkRequest *m_networkRequest;
 
 };
 
