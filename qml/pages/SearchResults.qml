@@ -20,6 +20,7 @@ Dialog{
 
     SilicaListView{
 
+
         PullDownMenu {
             MenuItem {
                 text: "Refresh"
@@ -27,7 +28,7 @@ Dialog{
             }
         }
 
-        header:   PageHeader {
+        header: PageHeader {
             id:header
             title: {
                 if(method == "GetDepartureBoard"){
@@ -88,6 +89,7 @@ Dialog{
                 font.pixelSize: Theme.fontSizeExtraSmall
                 anchors.right: parent.right
                 anchors.top: parent.top
+
             }
 
             Label {
@@ -95,12 +97,12 @@ Dialog{
                 text: {
 
                     if(model.amendedDepartureTime === "" && model.amendedArrivalTime === "" ){
-                        amendedTimeLabel.text="Amended Time: -"
+                        amendedTimeLabel.text="Status: -"
                     }else{
                         if(method == "GetDepartureBoard"){
-                            amendedTimeLabel.text ="Amended Time: " + model.amendedDepartureTime
+                            amendedTimeLabel.text ="Status: " + model.amendedDepartureTime
                         }else{
-                            amendedTimeLabel.text ="Amended Time: " + model.amendedArrivalTime
+                            amendedTimeLabel.text ="Status: " + model.amendedArrivalTime
                         }
                     }
                 }
@@ -112,20 +114,21 @@ Dialog{
 
         VerticalScrollDecorator{}
 
-    }
 
-    Component.onCompleted: {
-        networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
-    }
 
-    NetworkRequest {
-     id:networkrequest
+        Component.onCompleted: {
+            networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+        }
 
-    }
+        NetworkRequest {
+            id:networkrequest
 
-    ServiceModel{
-     id:serviceModel
-     source: networkrequest
+        }
 
+        ServiceModel{
+            id:serviceModel
+            source: networkrequest
+
+        }
     }
 }

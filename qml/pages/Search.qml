@@ -8,6 +8,9 @@ Page {
     width:parent.width;
     height:parent.height;
 
+    property string selectedHour;
+    property string selectedMinutes;
+
     SilicaFlickable{
 
         anchors.fill: parent
@@ -50,7 +53,7 @@ Page {
                             destination="";
                         }
 
-                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetArrivalBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase()})
+                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetArrivalBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase(),"timeOffset":offset.value})
 
                     }
                 }
@@ -72,7 +75,7 @@ Page {
                             destination="";
                         }
 
-                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase()})
+                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase(), "timeOffset": offset.value})
 
                     }
 
@@ -141,8 +144,8 @@ Page {
                             var location1 = locationLabel.text;
                             var location2 = destinationLabel.text;
 
-                            location.label = location2;
-                            destination.label = location1;
+                            locationLabel.text = location2;
+                            destinationLabel.text = location1;
                         }
                     }
 
@@ -180,24 +183,15 @@ Page {
                 onClicked: openFormDialog();
             }
 
-            ValueButton {
-
-                id: timeButton
+            Slider {
+                id:offset
                 width: parent.width
-                value: new Date().toTimeString()
-                onClicked:{
-                    var date = new Date();
-
-                    var dialog = pageStack.push(
-                                "Sailfish.Silica.TimePickerDialog", {
-                                    hour: date.getHours(),
-                                    minute: date.getMinutes()
-                                })
-
-                    dialog.accepted.connect(function() {
-                        timeButton.value = dialog.hour+":"+dialog.minute;
-                    })
-                }
+                minimumValue: -120
+                maximumValue: 119
+                value: 0
+                stepSize: 1
+                valueText: "Minutes+-: " + value
+                label:"Time Offset"
             }
         }
     }

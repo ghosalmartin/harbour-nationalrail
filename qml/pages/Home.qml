@@ -92,7 +92,6 @@ Page {
                 onClicked: {
                     var location = locationLabel.text.split(" - ")[1];
                     var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location })
-
                 }
 
             }
