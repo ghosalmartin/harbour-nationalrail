@@ -4,8 +4,7 @@
 #include "Database.h"
 #include <QDebug>
 
-StationsModel::StationsModel() :
-    QAbstractListModel()
+StationsModel::StationsModel() : QAbstractListModel(),m_favouritesmodel(0)
 {
     retrieveData();
 
@@ -49,9 +48,10 @@ bool StationsModel::setData(const QModelIndex &index, const QVariant &value, int
         return false;
     case favoritedRole: {
         bool newVal = value.toBool();
+        int id = _data.at(index.row()).getID();
         _data[index.row()].setFavorited(newVal);
         DatabaseOperations dbOp;
-        dbOp.updateFavourite(newVal, index.row()+1);
+        dbOp.updateFavourite(newVal, id);
         emit favouritesChanged();
         return true;
     }
@@ -76,7 +76,7 @@ void StationsModel::setFavouritesModel(FavouritesModel *favouritesmodel){
     if (m_favouritesmodel != favouritesmodel) {
 
         if (m_favouritesmodel){
-            //Currently causing segfaults;
+            //No longer causing segfaults, had to initilize the model in constructor, thanks lukedirtwalker :)
             disconnect(m_favouritesmodel, SIGNAL(favouriteRemoved()), this, SLOT(removeFavourite()));
 
         }
@@ -85,8 +85,6 @@ void StationsModel::setFavouritesModel(FavouritesModel *favouritesmodel){
         if (m_favouritesmodel) {
             connect(m_favouritesmodel, SIGNAL(favouriteRemoved()), this, SLOT(removeFavourite()));
         }
-
-
 
         emit favouritesModelChanged();
     }

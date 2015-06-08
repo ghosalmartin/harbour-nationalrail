@@ -26,13 +26,14 @@ QList<StationObject> DatabaseOperations::getAllStations(){
 
 bool DatabaseOperations::updateFavourite(bool favourite, int id){
 
+
+
     int conversion = 0;
 
     if(favourite){
         conversion = 1;
     }
 
-    qDebug() << conversion;
     QSqlQuery query(m_db);
     QString sql = QString("UPDATE stations SET favourite=%1 WHERE id=%2;").arg(conversion).arg(id);
     return query.exec(sql);

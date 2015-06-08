@@ -38,8 +38,9 @@ bool FavouritesModel::setData(const QModelIndex &index, const QVariant &value, i
         return false;
     case favoritedRole: {
         bool newVal = value.toBool();
+        int id = _data.at(index.row()).getID();
         DatabaseOperations dbOp;
-        qDebug() << dbOp.updateFavourite(newVal, index.row()+1);
+        dbOp.updateFavourite(newVal, id);
         emit favouriteRemoved();
         beginRemoveRows(index.parent(), index.row(), index.row());
         _data.removeAt(index.row());
