@@ -1,16 +1,20 @@
-#ifndef STATIONSMODEL_H
-#define STATIONSMODEL_H
+#ifndef FAVOURITESMODEL_H
+#define FAVOURITESMODEL_H
 
 #include <QAbstractListModel>
 #include <QHash>
 #include <StationObject.h>
+#include <StationsModel.h>
 #include <Database.h>
 
-class StationsModel : public QAbstractListModel
+class StationsModel;
+
+class FavouritesModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(StationsModel * stationsModel READ getStationsModel WRITE setStationsModel NOTIFY stationsModelChanged)
 public:
-    explicit StationsModel();
+    explicit FavouritesModel();
 
     enum Roles {
             idRole = Qt::UserRole,
@@ -21,18 +25,25 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QHash<int, QByteArray> roleNames() const { return _roles; }
-    void appendRow(StationObject station);
     bool setData(const QModelIndex &index, const QVariant &value, int role);
+    void retrieveData();
+    StationsModel *getStationsModel () const { return m_stationsmodel; }
+    void setStationsModel(StationsModel *source);
+
+signals:
+    void stationsModelChanged();
+    void favouriteRemoved();
+
+public slots:
+    void updateFavourites();
 
 private:
     QList<StationObject> _data;
     QHash<int, QByteArray> _roles;
-
-
-signals:
-
-public slots:
-
+    StationsModel *m_stationsmodel;
 };
 
-#endif // STATIONSMODEL_H
+#endif // FAVOURITESMODEL_H
+
+
+

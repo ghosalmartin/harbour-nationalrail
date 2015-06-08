@@ -3,7 +3,7 @@ Type=Application
 X-Nemo-Application-Type=silica-qt5
 Icon=harbour-nationalrail
 Exec=harbour-nationalrail
-Name=harbour-nationalrail
+Name=National Rail
 # translation example:
 # your app name in German locale (de)
 #

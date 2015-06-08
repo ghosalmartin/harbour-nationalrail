@@ -37,13 +37,14 @@ bool FavouritesModel::setData(const QModelIndex &index, const QVariant &value, i
     case stationRole:
         return false;
     case favoritedRole: {
-        beginRemoveRows(index,index.row(),index.row());
         bool newVal = value.toBool();
         DatabaseOperations dbOp;
-        dbOp.updateFavourite(newVal, index.row()+1);
+        qDebug() << dbOp.updateFavourite(newVal, index.row()+1);
+        emit favouriteRemoved();
+        beginRemoveRows(index.parent(), index.row(), index.row());
         _data.removeAt(index.row());
-        retrieveData();
         endRemoveRows();
+
         return true;
     }
     default:
@@ -56,3 +57,21 @@ void FavouritesModel::retrieveData(){
     _data = dbOp.getAllFavouriteStations();
 }
 
+void FavouritesModel::updateFavourites(){
+    beginResetModel();
+    retrieveData();
+    endResetModel();
+}
+
+void FavouritesModel::setStationsModel(StationsModel *stationsmodel){
+    if (m_stationsmodel != stationsmodel) {
+        if (m_stationsmodel) {
+            disconnect(m_stationsmodel, SIGNAL(favouritesChanged()), this, SLOT(updateFavourites()));
+        }
+        m_stationsmodel = stationsmodel;
+        if (m_stationsmodel) {
+            connect(m_stationsmodel, SIGNAL(favouritesChanged()), this, SLOT(updateFavourites()));
+        }
+        emit stationsModelChanged();
+    }
+}

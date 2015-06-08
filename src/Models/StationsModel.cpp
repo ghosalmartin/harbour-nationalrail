@@ -7,8 +7,7 @@
 StationsModel::StationsModel() :
     QAbstractListModel()
 {
-    DatabaseOperations dbOp;
-    _data = dbOp.getAllStations();
+    retrieveData();
 
     _roles[idRole] = "id";
     _roles[stationRole] = "station";
@@ -53,9 +52,42 @@ bool StationsModel::setData(const QModelIndex &index, const QVariant &value, int
         _data[index.row()].setFavorited(newVal);
         DatabaseOperations dbOp;
         dbOp.updateFavourite(newVal, index.row()+1);
+        emit favouritesChanged();
         return true;
     }
     default:
         return false;
+    }
+}
+
+void StationsModel::removeFavourite(){
+    beginResetModel();
+    retrieveData();
+    endResetModel();
+}
+
+void StationsModel::retrieveData(){
+    DatabaseOperations dbOp;
+    _data = dbOp.getAllStations();
+}
+
+void StationsModel::setFavouritesModel(FavouritesModel *favouritesmodel){
+
+    if (m_favouritesmodel != favouritesmodel) {
+
+        if (m_favouritesmodel){
+            //Currently causing segfaults;
+            disconnect(m_favouritesmodel, SIGNAL(favouriteRemoved()), this, SLOT(removeFavourite()));
+
+        }
+        m_favouritesmodel = favouritesmodel;
+
+        if (m_favouritesmodel) {
+            connect(m_favouritesmodel, SIGNAL(favouriteRemoved()), this, SLOT(removeFavourite()));
+        }
+
+
+
+        emit favouritesModelChanged();
     }
 }

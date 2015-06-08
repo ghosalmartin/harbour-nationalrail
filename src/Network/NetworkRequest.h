@@ -14,7 +14,7 @@ class NetworkRequest : public QObject
     Q_OBJECT
 
 public:
-    NetworkRequest(QObject *parent = 0);
+    NetworkRequest();
     Q_INVOKABLE void sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
     void processXYZReply();
     QDomDocument xmlDoc;

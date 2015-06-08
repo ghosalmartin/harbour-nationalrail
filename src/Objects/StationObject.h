@@ -8,9 +8,9 @@ class StationObject
 
 public:
     explicit StationObject(int id, QString station, bool favorited);
-    int getID();
-    QString getStation();
-    bool getFavorited();
+    int getID() const;
+    QString getStation() const;
+    bool getFavorited() const;
     void setFavorited(bool favorited);
 signals:
 

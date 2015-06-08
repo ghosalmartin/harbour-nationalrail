@@ -8,35 +8,9 @@ Page {
     width:parent.width;
     height:parent.height;
 
-    property string selectedHour;
-    property string selectedMinutes;
-
     SilicaFlickable{
 
         anchors.fill: parent
-
-        //        function loadResults(choice){
-        //            if(locationLabel.text != "Location"){
-
-        //                var location = locationLabel.text.split(" - ")[1];
-
-        //                if(destinationLabel.text != "Location"){
-        //                    var destination = destinationLabel.text.split(" - ")[1];
-        //                }else{
-        //                    destination="";
-        //                }
-
-        //                 var dialog;
-
-        //                if(choice === "departures"){
-        //                    dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase()})
-        //                }else{
-        //                    dialog = pageStack.push("SearchResults.qml", {"method":"GetArrivalBoard",rows: 30 ,"location": location ,"destination": destination, "fromto" : fromto.value.toLowerCase()})
-
-        //                }
-        //            }
-        //        }
-
 
         PullDownMenu {
 

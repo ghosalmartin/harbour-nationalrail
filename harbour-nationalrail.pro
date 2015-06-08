@@ -20,19 +20,38 @@ INSTALLS += database
 
 
 SOURCES += \
-    src/XMLGenerator.cpp \
-    src/ServiceObject.cpp \
-    src/NetworkRequest.cpp \
-    src/ServiceModel.cpp \
-    src/StationsModel.cpp \
-    src/StationsFilterModel.cpp \
-    src/Database.cpp \
-    src/StationObject.cpp \
-    src/DatabaseOperations.cpp \
+    src/Network/XMLGenerator.cpp \
+    src/Network/NetworkRequest.cpp \
+    src/Models/ServiceModel.cpp \
+    src/Models/StationsModel.cpp \
+    src/Models/FavouritesModel.cpp \
+    src/Filter/StationsFilterModel.cpp \
+    src/Database/Database.cpp \
+    src/Objects/StationObject.cpp \
+    src/Objects/ServiceObject.cpp \
+    src/Database/DatabaseOperations.cpp \
     src/harbour-nationalrail.cpp \
-    src/FavouritesModel.cpp
+
+
+HEADERS += \
+    src/Network/XMLGenerator.h \
+    src/Network/NetworkRequest.h \
+    src/Objects/ServiceObject.h \
+    src/Objects/StationObject.h \
+    src/Models/ServiceModel.h \
+    src/Models/StationsModel.h \
+    src/Models/FavouritesModel.h\
+    src/Filter/StationsFilterModel.h \
+    src/Database/Database.h \
+    src/Database/DatabaseOperations.h
+
 
 INCLUDEPATH += src/ \
+    src/Database/ \
+    src/Filter/ \
+    src/Models/ \
+    src/Network/ \
+    src/Objects/
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -53,17 +72,7 @@ OTHER_FILES += \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-HEADERS += \
-    src/XMLGenerator.h \
-    src/ServiceObject.h \
-    src/NetworkRequest.h \
-    src/ServiceModel.h \
-    src/StationsModel.h \
-    src/StationsFilterModel.h \
-    src/Database.h \
-    src/StationObject.h \
-    src/DatabaseOperations.h \
-    src/FavouritesModel.h
+
 
 QT+= core xml sql
 

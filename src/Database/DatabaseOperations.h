@@ -11,7 +11,7 @@ public:
     DatabaseOperations();
     QList<StationObject> getAllStations();
     QList<StationObject> getAllFavouriteStations();
-    void updateFavourite(bool favourite, int row);
+    bool updateFavourite(bool favourite, int row);
 private:
     QSqlDatabase m_db;
 };

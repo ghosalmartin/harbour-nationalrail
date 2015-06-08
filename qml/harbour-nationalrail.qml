@@ -32,10 +32,31 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
 
+import com.nationalrail.favouritesmodel 1.0
+import com.nationalrail.stationsmodel 1.0
+import com.nationalrail.stationsfiltermodel 1.0
+
 ApplicationWindow
 {
     initialPage: Component { Home { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
+    StationsModel{
+        id:stationsModel
+        favouriteModel: favouritesModel
+    }
+
+    StationsFilterModel{
+        id: stationsFilterModel
+        model: stationsModel
+    }
+
+    FavouritesModel{
+        id : favouritesModel
+        stationsModel: stationsModel
+    }
 }
+
+
 
 

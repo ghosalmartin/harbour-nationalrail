@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
     app->setApplicationName("harbour-nationalrail");
 
 
-
     QDir appDir(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).back());
     QString dbName = "stationsDB.sqlite";
     QString dbFolder = "."+app->applicationName();
@@ -71,12 +70,15 @@ int main(int argc, char *argv[])
 
     new Database;
 
-
-
     qmlRegisterType<NetworkRequest>("com.nationalrail.networkrequest", 1, 0, "NetworkRequest");
     qmlRegisterType<ServiceModel>("com.nationalrail.servicemodel", 1, 0, "ServiceModel");
+    qmlRegisterType<StationsModel>("com.nationalrail.stationsmodel", 1, 0, "StationsModel");
     qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
     qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
+
+
+    //QObject::connect(sfm.getModel(), SIGNAL(favouritesChanged()),  &fm, SLOT(favouritesChanged()));
+
 
     QQuickView *view = SailfishApp::createView();
 

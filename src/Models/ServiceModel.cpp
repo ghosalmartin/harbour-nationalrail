@@ -2,7 +2,7 @@
 #include <QListIterator>
 #include <QDebug>
 
-ServiceModel::ServiceModel(QObject *parent) : QAbstractListModel(), m_networkRequest(0)
+ServiceModel::ServiceModel() : QAbstractListModel(), m_networkRequest(0)
 {
     roles_[stationNameRole] = "stationName";
     roles_[stationCRSRole] = "stationCRS";
@@ -78,7 +78,7 @@ void ServiceModel::populateModel(QList<ServiceObject> services){
 void ServiceModel::setSource(NetworkRequest *source){
     if (m_networkRequest != source) {
         if (m_networkRequest) {
-            QObject::disconnect(m_networkRequest, SIGNAL(dataProcessed(QList<ServiceObject>)), this, SLOT(populateModel(QList<ServiceObject>)));
+            disconnect(m_networkRequest, SIGNAL(dataProcessed(QList<ServiceObject>)), this, SLOT(populateModel(QList<ServiceObject>)));
         }
         m_networkRequest = source;
         if (m_networkRequest) {

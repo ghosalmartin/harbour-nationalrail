@@ -6,12 +6,13 @@
 
 #include <ServiceObject.h>
 #include <NetworkRequest.h>
+
 class ServiceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(NetworkRequest * source READ getSource WRITE setSource NOTIFY sourceChanged)
 public:
-    explicit ServiceModel(QObject *parent = 0);
+    explicit ServiceModel();
 
     enum Roles {
             stationNameRole = Qt::UserRole + 1,

@@ -3,11 +3,8 @@
 StationsFilterModel::StationsFilterModel() :
     QSortFilterProxyModel()
 {
-    model = new StationsModel();
     setFilterCaseSensitivity(Qt::CaseInsensitive);
     setFilterRole(StationsModel::stationRole);
-
-    setSourceModel(model);
 }
 
 QString StationsFilterModel::filter() const
@@ -19,4 +16,16 @@ void StationsFilterModel::setFilter(const QString &filter)
 {
     setFilterFixedString(filter);
     emit filterChanged();
+}
+
+StationsModel * StationsFilterModel::getModel(){
+    return m_model;
+}
+
+void StationsFilterModel::setModel(StationsModel *model){
+    if (m_model != model) {
+        m_model = model;
+        setSourceModel(m_model);
+        emit modelChanged();
+    }
 }

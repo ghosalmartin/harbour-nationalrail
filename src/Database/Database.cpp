@@ -1,7 +1,7 @@
 #include "database.h"
 
 #include <QDir>
-#include <QDebug>
+
 QString const databaseFolder =".harbour-nationalrail";
 QString const databaseName ="stationsDB.sqlite";
 

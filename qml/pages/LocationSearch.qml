@@ -1,15 +1,13 @@
 import QtQuick 2.1
 import Sailfish.Silica 1.0
 
-import com.nationalrail.stationsfiltermodel 1.0
-
 Dialog {
     id: searchDialog
     property string searchString: ""
     property bool keepSearchFieldFocus
     property string selection: ""
 
-    onSearchStringChanged: stationsModel.filter = searchString
+    onSearchStringChanged: stationsFilterModel.filter = searchString
 
     canAccept:false;
 
@@ -45,7 +43,7 @@ Dialog {
         id: listViewComponent
         SilicaListView {
             id:listview
-            model: stationsModel
+            model: stationsFilterModel
             anchors.fill: parent
             currentIndex: -1 // otherwise currentItem will steal focus
             header:  Item {
@@ -104,12 +102,8 @@ Dialog {
                     searchField.forceActiveFocus()
                 }
                 keepSearchFieldFocus = false
-                stationsModel.filter = "";
+                stationsFilterModel.filter = "";
             }
         }
-    }
-
-    StationsFilterModel{
-     id:stationsModel
     }
 }
