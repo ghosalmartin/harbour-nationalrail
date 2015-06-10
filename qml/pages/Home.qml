@@ -57,8 +57,11 @@ Page {
                 title: "Favourites"
             }
 
-            delegate: BackgroundItem {
+            delegate: ComboBox {
                 id: backgroundItem
+                width: page.width
+                currentIndex: -1
+
 
                 ListView.onAdd: AddAnimation {
                     target: backgroundItem
@@ -88,15 +91,30 @@ Page {
                     highlighted: down || backgroundItem.highlighted
                 }
 
-                onClicked: {
-                    var location = locationLabel.text.split(" - ")[1];
-                    var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location })
+                menu: ContextMenu {
+                    MenuItem {
+                        text: "Departures"
+                        onClicked: {
+                            backgroundItem.value = "";
+                            var location = locationLabel.text.split(" - ")[1];
+                            var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location });
+                        }
+                    }
+                    MenuItem { text: "Arrivals"
+                        onClicked: {
+                            backgroundItem.value = "";
+                            var location = locationLabel.text.split(" - ")[1];
+                            var dialog = pageStack.push("SearchResults.qml", {"method":"GetArrivalBoard",rows: 30 ,"location": location });
+                        }
+                    }
                 }
+
+
+
 
             }
 
             VerticalScrollDecorator {}
         }
     }
-
 }

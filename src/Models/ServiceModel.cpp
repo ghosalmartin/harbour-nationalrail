@@ -73,6 +73,8 @@ void ServiceModel::populateModel(QList<ServiceObject> services){
     }
 
     endResetModel();
+
+    setReady(true);
 }
 
 void ServiceModel::setSource(NetworkRequest *source){
@@ -86,4 +88,12 @@ void ServiceModel::setSource(NetworkRequest *source){
         }
         emit sourceChanged();
     }
+}
+
+void ServiceModel::setReady(bool ready){
+    if (m_ready != ready) {
+        m_ready = ready;
+        emit readyChanged();
+    }
+
 }

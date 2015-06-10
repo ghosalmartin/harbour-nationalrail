@@ -11,6 +11,7 @@ class ServiceModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(NetworkRequest * source READ getSource WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(bool ready READ getReady WRITE setReady NOTIFY readyChanged)
 public:
     explicit ServiceModel();
 
@@ -37,8 +38,12 @@ public:
     NetworkRequest *getSource () const { return m_networkRequest; }
     void setSource(NetworkRequest *source);
 
+    bool getReady() const {return m_ready;}
+    void setReady(bool ready);
+
 signals:
     void sourceChanged();
+    void readyChanged();
 
 public slots:
     void populateModel(QList<ServiceObject> services);
@@ -46,6 +51,7 @@ private:
     QList<ServiceObject> data_;
     QHash<int, QByteArray> roles_;
     NetworkRequest *m_networkRequest;
+    bool m_ready;
 
 };
 

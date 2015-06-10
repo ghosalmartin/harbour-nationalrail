@@ -4,7 +4,9 @@ import com.nationalrail.networkrequest 1.0
 import com.nationalrail.servicemodel 1.0
 
 Dialog{
+
     id:dialog
+
 
     width:parent.width;
     height:parent.height;
@@ -18,9 +20,12 @@ Dialog{
     property string timeWindow;
     property string arrivaldeparture;
 
+    BusyIndicator {
+            anchors.centerIn: parent
+            running: !serviceModel.ready
+    }
+
     SilicaListView{
-
-
         PullDownMenu {
             MenuItem {
                 text: "Refresh"
@@ -122,13 +127,11 @@ Dialog{
 
         NetworkRequest {
             id:networkrequest
-
         }
 
         ServiceModel{
             id:serviceModel
             source: networkrequest
-
         }
     }
 }
