@@ -2,7 +2,7 @@
 #include <QListIterator>
 #include <QDebug>
 
-ServiceModel::ServiceModel() : QAbstractListModel(), m_networkRequest(0)
+ServiceModel::ServiceModel() : QAbstractListModel(), m_networkRequest(0), m_ready(false)
 {
     roles_[stationNameRole] = "stationName";
     roles_[stationCRSRole] = "stationCRS";
@@ -95,5 +95,4 @@ void ServiceModel::setReady(bool ready){
         m_ready = ready;
         emit readyChanged();
     }
-
 }

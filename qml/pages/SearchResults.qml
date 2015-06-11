@@ -20,16 +20,13 @@ Dialog{
     property string timeWindow;
     property string arrivaldeparture;
 
-    BusyIndicator {
-            anchors.centerIn: parent
-            running: !serviceModel.ready
-    }
+
 
     SilicaListView{
         PullDownMenu {
             MenuItem {
                 text: "Refresh"
-                onClicked: networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+                onClicked: timer.start()
             }
         }
 
@@ -42,6 +39,12 @@ Dialog{
                     header.title="Arrivals"
                 }
             }
+        }
+
+        BusyIndicator {
+            anchors.centerIn: parent
+            size: BusyIndicatorSize.Large
+            running: !serviceModel.ready
         }
 
         anchors.fill: parent
@@ -119,10 +122,16 @@ Dialog{
 
         VerticalScrollDecorator{}
 
-
+        Timer {
+               id:timer
+               interval: 250
+               running: true
+               repeat: false
+               onTriggered: networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+        }
 
         Component.onCompleted: {
-            networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+            timer.start();
         }
 
         NetworkRequest {
