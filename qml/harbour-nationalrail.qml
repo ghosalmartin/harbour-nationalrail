@@ -35,6 +35,8 @@ import "pages"
 import com.nationalrail.favouritesmodel 1.0
 import com.nationalrail.stationsmodel 1.0
 import com.nationalrail.stationsfiltermodel 1.0
+import com.nationalrail.networkrequest 1.0
+import com.nationalrail.messagesmodel 1.0
 
 ApplicationWindow
 {
@@ -54,6 +56,15 @@ ApplicationWindow
     FavouritesModel{
         id : favouritesModel
         stationsModel: stationsModel
+    }
+
+    NetworkRequest {
+        id:networkRequest
+    }
+
+    MessagesModel{
+        id:messagesModel
+        source: networkRequest
     }
 }
 

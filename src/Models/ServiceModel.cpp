@@ -67,10 +67,7 @@ void ServiceModel::populateModel(QList<ServiceObject> services){
 
     data_.clear();
 
-    QListIterator<ServiceObject> iterator(services);
-    while(iterator.hasNext()){
-        appendRow(iterator.next());
-    }
+    data_ = services;
 
     endResetModel();
 

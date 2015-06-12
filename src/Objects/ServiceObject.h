@@ -2,6 +2,7 @@
 #define SERVICEOBJECT_H
 
 #include <QObject>
+#include <QStringList>
 
 class ServiceObject
 {
@@ -20,7 +21,6 @@ public:
     QString getTrainOperator();
     QString getOperatorCode();
     QString getServiceID();
-
 
 private:
     QString m_stationName;

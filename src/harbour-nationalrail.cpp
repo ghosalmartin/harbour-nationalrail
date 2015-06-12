@@ -35,19 +35,21 @@
 #include <sailfishapp.h>
 #include <QGuiApplication>
 #include <QQuickView>
-#include <NetworkRequest.h>
-#include <XMLGenerator.h>
-#include <ServiceModel.h>
-#include <ServiceObject.h>
-#include <QQmlContext>
-#include <QtQml/qqml.h>
 
+#include <QtQml/qqml.h>
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
 
 #include <FavouritesModel.h>
 #include <StationsFilterModel.h>
+#include <NetworkRequest.h>
+#include <XMLGenerator.h>
+#include <ServiceModel.h>
+#include <MessagesModel.h>
+#include <Database.h>
+
+
 int main(int argc, char *argv[])
 {
 
@@ -75,10 +77,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<StationsModel>("com.nationalrail.stationsmodel", 1, 0, "StationsModel");
     qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
     qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
-
-
-    //QObject::connect(sfm.getModel(), SIGNAL(favouritesChanged()),  &fm, SLOT(favouritesChanged()));
-
+    qmlRegisterType<MessagesModel>("com.nationalrail.messagesmodel", 1, 0, "MessagesModel");
 
     QQuickView *view = SailfishApp::createView();
 

@@ -31,6 +31,8 @@ SOURCES += \
     src/Objects/ServiceObject.cpp \
     src/Database/DatabaseOperations.cpp \
     src/harbour-nationalrail.cpp \
+    src/Objects/MessageObject.cpp \
+    src/Models/MessagesModel.cpp
 
 
 HEADERS += \
@@ -43,7 +45,9 @@ HEADERS += \
     src/Models/FavouritesModel.h\
     src/Filter/StationsFilterModel.h \
     src/Database/Database.h \
-    src/Database/DatabaseOperations.h
+    src/Database/DatabaseOperations.h \
+    src/Objects/MessageObject.h \
+    src/Models/MessagesModel.h
 
 
 INCLUDEPATH += src/ \
@@ -66,7 +70,9 @@ OTHER_FILES += \
     database/stationsDB.sqlite \
     harbour-nationalrail.desktop \
     qml/harbour-nationalrail.qml \
-    qml/pages/SearchResults.qml
+    qml/pages/SearchResults.qml \
+    qml/pages/Settings.qml \
+    qml/pages/StationMessages.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

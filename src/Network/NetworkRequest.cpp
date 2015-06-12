@@ -36,7 +36,7 @@ void NetworkRequest::sendXYZRequest(QString operation,int numRows, QString CRS, 
     mgr->post(request, xml);
     connect(mgr, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(XYZReplyFinished(QNetworkReply*)));
-    eventLoop.exec();    
+    eventLoop.exec();
 }
 
 void NetworkRequest::XYZReplyFinished(QNetworkReply *reply){
@@ -59,11 +59,21 @@ void NetworkRequest::processXYZReply(){
 
     m_services.clear();
 
+    QDomNodeList messages = xmlDoc.elementsByTagName("nrccMessages");
+
+    if(messages.length() !=0){
+        for (int i = 0; i < messages.size(); i++) {
+            QDomNode messageNode = messages.item(i);
+            QDomElement element = messageNode.firstChildElement("message");
+            MessageObject message(element.text());
+            m_messages.append(message);
+        }
+    }
+
     QDomNodeList services = xmlDoc.elementsByTagName("service");
     for (int i = 0; i < services.size(); i++) {
         QDomNode service = services.item(i);
 
-        //Need another for loop here, just for those two
         QDomElement origin = service.firstChildElement("origin");
         QDomNode location = origin.firstChild();
         QDomElement locationName = location.firstChildElement("locationName");
@@ -74,13 +84,13 @@ void NetworkRequest::processXYZReply(){
         QDomElement destinationName = destinationNode.firstChildElement("locationName");
         QDomElement destinationCRS =  destinationNode.firstChildElement("crs");
 
-
         //Changes between sta and std but actually both can be used.
         QDomElement std = service.firstChildElement("std");
         QDomElement etd = service.firstChildElement("etd");
 
         QDomElement sta = service.firstChildElement("sta");
         QDomElement eta = service.firstChildElement("eta");
+
         QDomElement platform = service.firstChildElement("platform");
         QDomElement trainOperator = service.firstChildElement("operator");
         QDomElement operatorCode = service.firstChildElement("operatorCode");
@@ -90,8 +100,10 @@ void NetworkRequest::processXYZReply(){
 
         m_services.append(object);
 
+
     }
 
+    emit messagesProcessed(m_messages);
     emit dataProcessed(m_services);
 }
 

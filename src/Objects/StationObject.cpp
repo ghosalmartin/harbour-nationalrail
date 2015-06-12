@@ -1,7 +1,5 @@
 #include "StationObject.h"
 
-#include "QDebug"
-
 StationObject::StationObject(int id, QString station, bool favorited)
 {
     m_id = id;

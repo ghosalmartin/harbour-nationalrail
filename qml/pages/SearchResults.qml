@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.nationalrail.networkrequest 1.0
 import com.nationalrail.servicemodel 1.0
 
 Dialog{
 
     id:dialog
-
 
     width:parent.width;
     height:parent.height;
@@ -20,10 +18,13 @@ Dialog{
     property string timeWindow;
     property string arrivaldeparture;
 
-
-
     SilicaListView{
         PullDownMenu {
+            MenuItem {
+                text: "Station Messages"
+                onClicked: pageStack.push(Qt.resolvedUrl("StationMessages.qml"))
+            }
+
             MenuItem {
                 text: "Refresh"
                 onClicked: timer.start()
@@ -127,20 +128,16 @@ Dialog{
                interval: 250
                running: true
                repeat: false
-               onTriggered: networkrequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+               onTriggered: networkRequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
         }
 
         Component.onCompleted: {
             timer.start();
         }
 
-        NetworkRequest {
-            id:networkrequest
-        }
-
         ServiceModel{
             id:serviceModel
-            source: networkrequest
+            source: networkRequest
         }
     }
 }
