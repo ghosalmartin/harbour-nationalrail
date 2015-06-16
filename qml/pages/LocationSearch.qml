@@ -16,8 +16,6 @@ Dialog {
         sourceComponent: listViewComponent
     }
 
-
-
     Column {
         id: headerContainer
 
@@ -78,9 +76,9 @@ Dialog {
                 IconButton {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                    icon.source: favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
                     onClicked: {
-                        model.favorited = !model.favorited;
+                        favorited = !favorited;
                     }
                     highlighted: down || backgroundItem.highlighted
                 }

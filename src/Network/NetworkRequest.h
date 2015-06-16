@@ -14,12 +14,17 @@ class NetworkRequest : public QObject
     Q_OBJECT
 public:
     NetworkRequest();
+    ~NetworkRequest();
     Q_INVOKABLE void sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow);
     void processXYZReply();
+    Q_INVOKABLE void sendServiceID(QString serviceID);
+    void processServiceIDReply();
     QDomDocument xmlDoc;
+
 
 public slots:
     void XYZReplyFinished(QNetworkReply *reply);
+    void ServiceIDReplyFinished(QNetworkReply *reply);
     QList<ServiceObject> getServicesList();
 
 signals:

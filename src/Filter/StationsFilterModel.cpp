@@ -1,5 +1,5 @@
 #include "StationsFilterModel.h"
-#include <QDebug>
+
 StationsFilterModel::StationsFilterModel() :
     QSortFilterProxyModel()
 {

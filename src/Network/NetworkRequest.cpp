@@ -14,6 +14,12 @@ NetworkRequest::NetworkRequest()
 {
 }
 
+NetworkRequest::~NetworkRequest()
+{
+    delete mgr;
+}
+
+
 void NetworkRequest::sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow){
 
     QString url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
@@ -68,6 +74,10 @@ void NetworkRequest::processXYZReply(){
             MessageObject message(element.text());
             m_messages.append(message);
         }
+    }else{
+        m_messages.clear();
+        MessageObject message("This station has no messages");
+        m_messages.append(message);
     }
 
     QDomNodeList services = xmlDoc.elementsByTagName("service");
@@ -109,6 +119,51 @@ void NetworkRequest::processXYZReply(){
 
 QList<ServiceObject> NetworkRequest::getServicesList(){
     return m_services;
+}
+
+void NetworkRequest::sendServiceID(QString serviceID){
+
+    QString url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
+
+    XMLGenerator generator;
+
+    QByteArray xml = generator.createServiceDetailXML(serviceID);
+
+    mgr = new QNetworkAccessManager(this);
+
+    QNetworkRequest request;
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
+    request.setUrl(url);
+
+    QSslConfiguration config = request.sslConfiguration();
+    config.setPeerVerifyMode(QSslSocket::VerifyNone);
+    config.setProtocol(QSsl::TlsV1_0);
+    request.setSslConfiguration(config);
+
+    mgr->post(request, xml);
+    connect(mgr, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(ServiceIDReplyFinished(QNetworkReply*)));
+    eventLoop.exec();
+}
+
+void NetworkRequest::ServiceIDReplyFinished(QNetworkReply *reply){
+    if (reply->error() == QNetworkReply::NoError) {
+        xmlDoc.setContent(reply->readAll(),0,0,0,0);
+        delete reply;
+        //qDebug() << xmlDoc.toString(1);
+        eventLoop.exit(0);
+        processXYZReply();
+    }
+    else {
+        qDebug() << "Failure" <<reply->errorString();
+        delete reply;
+        eventLoop.exit(0);
+    }
+
+}
+
+void NetworkRequest::processServiceIDReply(){
+
 }
 
 
