@@ -48,6 +48,8 @@
 #include <ServiceModel.h>
 #include <MessagesModel.h>
 #include <Database.h>
+#include <PreviousCPModel.h>
+#include <SubsequentCPModel.h>
 
 
 int main(int argc, char *argv[])
@@ -78,6 +80,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
     qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
     qmlRegisterType<MessagesModel>("com.nationalrail.messagesmodel", 1, 0, "MessagesModel");
+    qmlRegisterType<PreviousCPModel>("com.nationalrail.previouscpmodel", 1, 0, "PreviousCPModel");
+    qmlRegisterType<SubsequentCPModel>("com.nationalrail.subsequentcpmodel", 1, 0, "SubsequentCPModel");
 
     QQuickView *view = SailfishApp::createView();
 

@@ -12,6 +12,8 @@
 
 NetworkRequest::NetworkRequest()
 {
+
+    url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
 }
 
 NetworkRequest::~NetworkRequest()
@@ -21,10 +23,6 @@ NetworkRequest::~NetworkRequest()
 
 
 void NetworkRequest::sendXYZRequest(QString operation,int numRows, QString CRS, QString filterCRS, QString filterType, QString timeOffset, QString timeWindow){
-
-    QString url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
-
-    XMLGenerator generator;
 
     QByteArray xml=generator.createOperationXML(operation,numRows, CRS, filterCRS, filterType, timeOffset, timeWindow);
 
@@ -109,8 +107,6 @@ void NetworkRequest::processXYZReply(){
         ServiceObject object(locationName.text(),locationCRS.text(), destinationName.text(),destinationCRS.text(), std.text(),etd.text(),sta.text(),eta.text(),platform.text(),trainOperator.text(),operatorCode.text(),serviceID.text());
 
         m_services.append(object);
-
-
     }
 
     emit messagesProcessed(m_messages);
@@ -121,11 +117,10 @@ QList<ServiceObject> NetworkRequest::getServicesList(){
     return m_services;
 }
 
-void NetworkRequest::sendServiceID(QString serviceID){
+void NetworkRequest::sendServiceIDRequest(QString serviceID){
 
-    QString url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
-
-    XMLGenerator generator;
+    m_previousCallingPoints.clear();
+    m_subsequentCallingPoints.clear();
 
     QByteArray xml = generator.createServiceDetailXML(serviceID);
 
@@ -152,7 +147,7 @@ void NetworkRequest::ServiceIDReplyFinished(QNetworkReply *reply){
         delete reply;
         //qDebug() << xmlDoc.toString(1);
         eventLoop.exit(0);
-        processXYZReply();
+        processServiceIDReply();
     }
     else {
         qDebug() << "Failure" <<reply->errorString();
@@ -163,6 +158,44 @@ void NetworkRequest::ServiceIDReplyFinished(QNetworkReply *reply){
 }
 
 void NetworkRequest::processServiceIDReply(){
+
+    QDomNodeList previousCallingPoints = xmlDoc.elementsByTagName("previousCallingPoints");
+    QDomNodeList subsequentCallingPoints = xmlDoc.elementsByTagName("subsequentCallingPoints");
+
+    QDomNodeList previousCallingPointsList = previousCallingPoints.at(0).firstChild().childNodes();
+    QDomNodeList subsequentCallingPointsList = subsequentCallingPoints.at(0).firstChild().childNodes();
+
+    if(previousCallingPointsList.length() !=0){
+        for (int i = 0; i < previousCallingPoints.size(); i++) {
+            QDomNode callingpoint = previousCallingPointsList.at(i);
+
+            QDomElement locationName = callingpoint.firstChildElement("locationName");
+            QDomElement crs = callingpoint.firstChildElement("crs");
+            QDomElement st = callingpoint.firstChildElement("st");
+            QDomElement at = callingpoint.firstChildElement("at");
+
+            CallingPointObject cp(locationName.text(),crs.text(),st.text(),at.text());
+            m_previousCallingPoints.append(cp);
+        }
+    }
+
+    if(subsequentCallingPointsList.length() !=0){
+        for (int i = 0; i < subsequentCallingPointsList.size(); i++) {
+            QDomNode callingpoint = subsequentCallingPointsList.at(i);
+
+            QDomElement locationName = callingpoint.firstChildElement("locationName");
+            QDomElement crs = callingpoint.firstChildElement("crs");
+            QDomElement st = callingpoint.firstChildElement("st");
+            QDomElement at = callingpoint.firstChildElement("at");
+
+            CallingPointObject cp(locationName.text(),crs.text(),st.text(),at.text());
+            m_subsequentCallingPoints.append(cp);
+
+        }
+    }
+
+    emit previousCallingPointsProcessed(m_previousCallingPoints);
+    emit subsequentCallingPointsProcessed(m_subsequentCallingPoints);
 
 }
 

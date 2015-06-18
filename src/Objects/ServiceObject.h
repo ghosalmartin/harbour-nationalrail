@@ -8,7 +8,7 @@ class ServiceObject
 {
 
 public:
-    ServiceObject(QString, QString, QString, QString,QString,QString, QString, QString, QString,QString,QString, QString);
+    ServiceObject(QString stationName, QString stationCRS,QString destination, QString destinationCRS, QString departureTime, QString amendedDepartureTime, QString arrivalTime, QString amendedArrivalTime, QString platform, QString trainOperator, QString trainOperatorCode, QString serviceID);
     QString getStationName();
     QString getStationCRS();
     QString getDestination();

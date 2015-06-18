@@ -119,6 +119,8 @@ Dialog{
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
             }
+
+            onClicked: pageStack.push("JourneyDetails.qml", {"serviceID":model.serviceID})
         }
 
         VerticalScrollDecorator{}

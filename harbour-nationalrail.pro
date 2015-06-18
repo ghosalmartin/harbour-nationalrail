@@ -32,7 +32,10 @@ SOURCES += \
     src/Database/DatabaseOperations.cpp \
     src/harbour-nationalrail.cpp \
     src/Objects/MessageObject.cpp \
-    src/Models/MessagesModel.cpp
+    src/Models/MessagesModel.cpp \
+    src/Objects/CallingPointObject.cpp \
+    src/Models/PreviousCPModel.cpp \
+    src/Models/SubsequentCPModel.cpp
 
 
 HEADERS += \
@@ -47,7 +50,10 @@ HEADERS += \
     src/Database/Database.h \
     src/Database/DatabaseOperations.h \
     src/Objects/MessageObject.h \
-    src/Models/MessagesModel.h
+    src/Models/MessagesModel.h \
+    src/Objects/CallingPointObject.h \
+    src/Models/PreviousCPModel.h \
+    src/Models/SubsequentCPModel.h
 
 
 INCLUDEPATH += src/ \
@@ -72,7 +78,8 @@ OTHER_FILES += \
     qml/harbour-nationalrail.qml \
     qml/pages/SearchResults.qml \
     qml/pages/Settings.qml \
-    qml/pages/StationMessages.qml
+    qml/pages/StationMessages.qml \
+    qml/pages/JourneyDetails.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
