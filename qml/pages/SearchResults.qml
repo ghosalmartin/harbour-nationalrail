@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.nationalrail.servicemodel 1.0
+import harbour.nationalrail.servicemodel 1.0
 
 Dialog{
 
@@ -57,6 +57,7 @@ Dialog{
             width: ListView.view.width
             height: Theme.itemSizeSmall
 
+
             Label {
                 id:locationLabel
                 text: {
@@ -67,7 +68,7 @@ Dialog{
                     }
 
                 }
-                anchors.top: parent.top
+                //anchors.top: parent.top
                 anchors.left: parent.left
             }
 
@@ -83,8 +84,10 @@ Dialog{
 
                 font.pixelSize: Theme.fontSizeExtraSmall
                 anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
+                //anchors.verticalCenter: parent.verticalCenter
             }
+
+
 
             Label {
                 id: textTimeLabel
@@ -126,11 +129,11 @@ Dialog{
         VerticalScrollDecorator{}
 
         Timer {
-               id:timer
-               interval: 250
-               running: true
-               repeat: false
-               onTriggered: networkRequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
+            id:timer
+            interval: 250
+            running: true
+            repeat: false
+            onTriggered: networkRequest.sendXYZRequest(method, rows, location, destination, fromto, timeOffset, timeWindow);
         }
 
         Component.onCompleted: {

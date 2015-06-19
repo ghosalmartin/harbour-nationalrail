@@ -14,7 +14,7 @@ Name:       harbour-nationalrail
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    National Rail UK
 Version:    0.1
-Release:    1
+Release:    2
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/

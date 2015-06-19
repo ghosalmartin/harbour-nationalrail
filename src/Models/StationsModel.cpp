@@ -53,6 +53,7 @@ bool StationsModel::setData(const QModelIndex &index, const QVariant &value, int
         DatabaseOperations dbOp;
         dbOp.updateFavourite(newVal, id);
         emit favouritesChanged();
+        emit dataChanged(index,index);
         return true;
     }
     default:

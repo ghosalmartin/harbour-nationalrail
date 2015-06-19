@@ -45,6 +45,7 @@ bool FavouritesModel::setData(const QModelIndex &index, const QVariant &value, i
         beginRemoveRows(index.parent(), index.row(), index.row());
         _data.removeAt(index.row());
         endRemoveRows();
+        emit dataChanged(index,index);
 
         return true;
     }

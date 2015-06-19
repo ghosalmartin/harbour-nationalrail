@@ -76,9 +76,9 @@ Dialog {
                 IconButton {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    icon.source: favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                    icon.source: model.favorited ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
                     onClicked: {
-                        favorited = !favorited;
+                        model.favorited = !model.favorited;
                     }
                     highlighted: down || backgroundItem.highlighted
                 }

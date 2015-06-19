@@ -65,7 +65,6 @@ INCLUDEPATH += src/ \
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    rpm/harbour-nationalrail.changes.in \
     rpm/harbour-nationalrail.spec \
     rpm/harbour-nationalrail.yaml \
     translations/*.ts \
@@ -79,7 +78,8 @@ OTHER_FILES += \
     qml/pages/SearchResults.qml \
     qml/pages/Settings.qml \
     qml/pages/StationMessages.qml \
-    qml/pages/JourneyDetails.qml
+    qml/pages/JourneyDetails.qml \
+    rpm/harbour-nationalrail.changes
 
 # to disable building translations every time, comment out the
 # following CONFIG line

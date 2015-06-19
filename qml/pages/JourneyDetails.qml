@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import com.nationalrail.previouscpmodel 1.0
-import com.nationalrail.subsequentcpmodel 1.0
+import harbour.nationalrail.previouscpmodel 1.0
+import harbour.nationalrail.subsequentcpmodel 1.0
 
 
 Dialog{

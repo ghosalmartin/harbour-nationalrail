@@ -74,14 +74,14 @@ int main(int argc, char *argv[])
 
     new Database;
 
-    qmlRegisterType<NetworkRequest>("com.nationalrail.networkrequest", 1, 0, "NetworkRequest");
-    qmlRegisterType<ServiceModel>("com.nationalrail.servicemodel", 1, 0, "ServiceModel");
-    qmlRegisterType<StationsModel>("com.nationalrail.stationsmodel", 1, 0, "StationsModel");
-    qmlRegisterType<StationsFilterModel>("com.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
-    qmlRegisterType<FavouritesModel>("com.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
-    qmlRegisterType<MessagesModel>("com.nationalrail.messagesmodel", 1, 0, "MessagesModel");
-    qmlRegisterType<PreviousCPModel>("com.nationalrail.previouscpmodel", 1, 0, "PreviousCPModel");
-    qmlRegisterType<SubsequentCPModel>("com.nationalrail.subsequentcpmodel", 1, 0, "SubsequentCPModel");
+    qmlRegisterType<NetworkRequest>("harbour.nationalrail.networkrequest", 1, 0, "NetworkRequest");
+    qmlRegisterType<ServiceModel>("harbour.nationalrail.servicemodel", 1, 0, "ServiceModel");
+    qmlRegisterType<StationsModel>("harbour.nationalrail.stationsmodel", 1, 0, "StationsModel");
+    qmlRegisterType<StationsFilterModel>("harbour.nationalrail.stationsfiltermodel", 1, 0, "StationsFilterModel");
+    qmlRegisterType<FavouritesModel>("harbour.nationalrail.favouritesmodel", 1, 0, "FavouritesModel");
+    qmlRegisterType<MessagesModel>("harbour.nationalrail.messagesmodel", 1, 0, "MessagesModel");
+    qmlRegisterType<PreviousCPModel>("harbour.nationalrail.previouscpmodel", 1, 0, "PreviousCPModel");
+    qmlRegisterType<SubsequentCPModel>("harbour.nationalrail.subsequentcpmodel", 1, 0, "SubsequentCPModel");
 
     QQuickView *view = SailfishApp::createView();
 
