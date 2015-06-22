@@ -66,7 +66,7 @@ Page {
             width:parent.width;
             height:parent.height;
 
-            spacing: Theme.paddingLarge
+            spacing: Theme.paddingMedium
 
 
             BackgroundItem {
@@ -76,7 +76,7 @@ Page {
                     id:locationLabel
                     text:"Location"
                     anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.leftMargin: Theme.paddingMedium
                     anchors.verticalCenter: parent.verticalCenter
                     textFormat: Text.StyledText
 
@@ -143,7 +143,7 @@ Page {
                     text:"Location"
 
                     anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.leftMargin: Theme.paddingMedium
                     anchors.verticalCenter: parent.verticalCenter
                     textFormat: Text.StyledText}
                 function openFormDialog() {

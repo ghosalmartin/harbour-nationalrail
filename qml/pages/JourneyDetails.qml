@@ -60,6 +60,7 @@ Dialog{
                     text: model.locationName
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Theme.paddingMedium
                 }
 
                 Label {
@@ -68,6 +69,7 @@ Dialog{
                     font.pixelSize: Theme.fontSizeExtraSmall
                     anchors.right: parent.right
                     anchors.top: parent.top
+                    anchors.rightMargin: Theme.paddingMedium
                 }
 
                 Label {
@@ -76,6 +78,7 @@ Dialog{
                     font.pixelSize: Theme.fontSizeExtraSmall
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.rightMargin: Theme.paddingMedium
                 }
             }
         }
@@ -122,6 +125,7 @@ Dialog{
                     text: model.locationName
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Theme.paddingMedium
                 }
 
 
@@ -131,6 +135,7 @@ Dialog{
                     font.pixelSize: Theme.fontSizeExtraSmall
                     anchors.right: parent.right
                     anchors.top: parent.top
+                    anchors.rightMargin: Theme.paddingMedium
 
                 }
 
@@ -140,6 +145,7 @@ Dialog{
                     font.pixelSize: Theme.fontSizeExtraSmall
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
+                    anchors.rightMargin: Theme.paddingMedium
                 }
             }
         }

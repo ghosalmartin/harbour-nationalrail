@@ -73,7 +73,7 @@ Page {
                 Label {
                     id: locationLabel
                     anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.leftMargin: Theme.paddingMedium
                     anchors.verticalCenter: parent.verticalCenter
                     color: highlighted ? Theme.highlightColor : Theme.primaryColor
                     textFormat: Text.StyledText

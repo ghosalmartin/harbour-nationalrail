@@ -63,7 +63,7 @@ Dialog {
 
                 Label {
                     anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
+                    anchors.leftMargin: Theme.paddingMedium
                     anchors.verticalCenter: parent.verticalCenter
 
                     color: searchString.length > 0 ? (highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor)
