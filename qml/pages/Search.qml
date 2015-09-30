@@ -107,7 +107,7 @@ Page {
                     anchors.right: parent.right
                     width: Theme.iconSizeMedium
                     height: width;
-                    icon.source: "image://theme/icon-m-mobile-network"
+                    icon.source: "image://theme/icon-m-transfer"
                     onClicked: {
 
                         oppDirection.state == "rotated" ? oppDirection.state = "" : oppDirection.state = "rotated";

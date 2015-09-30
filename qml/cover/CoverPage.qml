@@ -30,22 +30,53 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.nationalrail.favouritesmodel 1.0
 
 CoverBackground {
 
-    ListView{
+    SilciaGridView {
+        id:listview
+        model: favouritesModel
+        anchors.fill: parent
+        currentIndex: -1 // otherwise currentItem will steal fo        header: PageHeader {
 
-    }
+        delegate: ComboBox {
+            id: backgroundItem
+            width: page.width
+            currentIndex: -1
+
+            Label {
+                id: locationLabel
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingMedium
+                anchors.verticalCenter: parent.verticalCenter
+                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                textFormat: Text.StyledText
+                text: model.station
+
+            }
+
+//            menu: ContextMenu {
+//                MenuItem {
+//                    text: "Departures"
+//                    onClicked: {
+//                        backgroundItem.value = "";
+//                        var location = locationLabel.text.split(" - ")[1];
+//                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetDepartureBoard",rows: 30 ,"location": location });
+//                    }
+//                }
+//                MenuItem { text: "Arrivals"
+//                    onClicked: {
+//                        backgroundItem.value = "";
+//                        var location = locationLabel.text.split(" - ")[1];
+//                        var dialog = pageStack.push("SearchResults.qml", {"method":"GetArrivalBoard",rows: 30 ,"location": location });
+//                    }
+//                }
+//            }
 
 
-    CoverActionList {
-        id: coverAction
 
-        CoverAction {
-            iconSource: "image://theme/icon-cover-previous"
-        }
-        CoverAction {
-            iconSource: "image://theme/icon-cover-next"
+
         }
 
     }

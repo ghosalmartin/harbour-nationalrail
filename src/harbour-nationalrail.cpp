@@ -55,15 +55,18 @@
 int main(int argc, char *argv[])
 {
 
+
     QGuiApplication *app = SailfishApp::application(argc, argv);
+    qDebug() << "Created Application";
 
     app->setOrganizationName("harbour-nationalrail");
     app->setApplicationName("harbour-nationalrail");
-
+    qDebug() << "Set names";
 
     QDir appDir(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).back());
     QString dbName = "stationsDB.sqlite";
     QString dbFolder = "."+app->applicationName();
+
 
     if(!QFile::exists(QDir::homePath()+QDir::separator()+dbFolder+QDir::separator()+dbName)){
         QDir dir;
@@ -82,12 +85,17 @@ int main(int argc, char *argv[])
     qmlRegisterType<MessagesModel>("harbour.nationalrail.messagesmodel", 1, 0, "MessagesModel");
     qmlRegisterType<PreviousCPModel>("harbour.nationalrail.previouscpmodel", 1, 0, "PreviousCPModel");
     qmlRegisterType<SubsequentCPModel>("harbour.nationalrail.subsequentcpmodel", 1, 0, "SubsequentCPModel");
+    qDebug() << "Registered all the models in QML";
 
     QQuickView *view = SailfishApp::createView();
+    qDebug() << "Created view";
 
     QString qml = QString("qml/%1.qml").arg("harbour-nationalrail");
+
     view->setSource(SailfishApp::pathTo(qml));
+    qDebug() << "Set source";
     view->show();
+    qDebug() << "Showed view";
 
     return app->exec();
 
