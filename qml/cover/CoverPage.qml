@@ -34,7 +34,7 @@ import harbour.nationalrail.favouritesmodel 1.0
 
 CoverBackground {
 
-    SilciaGridView {
+    SilicaGridView {
         id:listview
         model: favouritesModel
         anchors.fill: parent
