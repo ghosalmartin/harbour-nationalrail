@@ -85,10 +85,7 @@ OTHER_FILES += \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-
-
 QT+= core xml sql
-
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the

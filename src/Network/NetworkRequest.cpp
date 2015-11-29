@@ -13,7 +13,7 @@
 NetworkRequest::NetworkRequest()
 {
 
-    url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx";
+    url = "https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb7.asmx";
 }
 
 NetworkRequest::~NetworkRequest()
@@ -78,31 +78,31 @@ void NetworkRequest::processXYZReply(){
         m_messages.append(message);
     }
 
-    QDomNodeList services = xmlDoc.elementsByTagName("service");
+    QDomNodeList services = xmlDoc.elementsByTagName("lt3:service");
     for (int i = 0; i < services.size(); i++) {
         QDomNode service = services.item(i);
 
-        QDomElement origin = service.firstChildElement("origin");
+        QDomElement origin = service.firstChildElement("lt3:origin");
         QDomNode location = origin.firstChild();
-        QDomElement locationName = location.firstChildElement("locationName");
-        QDomElement locationCRS =  location.firstChildElement("crs");
+        QDomElement locationName = location.firstChildElement("lt2:locationName");
+        QDomElement locationCRS =  location.firstChildElement("lt2:crs");
 
-        QDomElement destination= service.firstChildElement("destination");
+        QDomElement destination= service.firstChildElement("lt3:destination");
         QDomNode destinationNode = destination.firstChild();
-        QDomElement destinationName = destinationNode.firstChildElement("locationName");
-        QDomElement destinationCRS =  destinationNode.firstChildElement("crs");
+        QDomElement destinationName = destinationNode.firstChildElement("lt2:locationName");
+        QDomElement destinationCRS =  destinationNode.firstChildElement("lt2:crs");
 
         //Changes between sta and std but actually both can be used.
-        QDomElement std = service.firstChildElement("std");
-        QDomElement etd = service.firstChildElement("etd");
+        QDomElement std = service.firstChildElement("lt3:std");
+        QDomElement etd = service.firstChildElement("lt3:etd");
 
-        QDomElement sta = service.firstChildElement("sta");
-        QDomElement eta = service.firstChildElement("eta");
+        QDomElement sta = service.firstChildElement("lt3:sta");
+        QDomElement eta = service.firstChildElement("lt3:eta");
 
-        QDomElement platform = service.firstChildElement("platform");
-        QDomElement trainOperator = service.firstChildElement("operator");
-        QDomElement operatorCode = service.firstChildElement("operatorCode");
-        QDomElement serviceID = service.firstChildElement("serviceID");
+        QDomElement platform = service.firstChildElement("lt3:platform");
+        QDomElement trainOperator = service.firstChildElement("lt3:operator");
+        QDomElement operatorCode = service.firstChildElement("lt3:operatorCode");
+        QDomElement serviceID = service.firstChildElement("lt3:serviceID");
 
         ServiceObject object(locationName.text(),locationCRS.text(), destinationName.text(),destinationCRS.text(), std.text(),etd.text(),sta.text(),eta.text(),platform.text(),trainOperator.text(),operatorCode.text(),serviceID.text());
 
@@ -159,8 +159,8 @@ void NetworkRequest::ServiceIDReplyFinished(QNetworkReply *reply){
 
 void NetworkRequest::processServiceIDReply(){
 
-    QDomNodeList previousCallingPoints = xmlDoc.elementsByTagName("previousCallingPoints");
-    QDomNodeList subsequentCallingPoints = xmlDoc.elementsByTagName("subsequentCallingPoints");
+    QDomNodeList previousCallingPoints = xmlDoc.elementsByTagName("lt2:previousCallingPoints");
+    QDomNodeList subsequentCallingPoints = xmlDoc.elementsByTagName("lt2:subsequentCallingPoints");
 
     QDomNodeList previousCallingPointsList = previousCallingPoints.at(0).firstChild().childNodes();
     QDomNodeList subsequentCallingPointsList = subsequentCallingPoints.at(0).firstChild().childNodes();
@@ -169,10 +169,10 @@ void NetworkRequest::processServiceIDReply(){
         for (int i = 0; i < previousCallingPoints.size(); i++) {
             QDomNode callingpoint = previousCallingPointsList.at(i);
 
-            QDomElement locationName = callingpoint.firstChildElement("locationName");
-            QDomElement crs = callingpoint.firstChildElement("crs");
-            QDomElement st = callingpoint.firstChildElement("st");
-            QDomElement at = callingpoint.firstChildElement("at");
+            QDomElement locationName = callingpoint.firstChildElement("lt:locationName");
+            QDomElement crs = callingpoint.firstChildElement("lt:crs");
+            QDomElement st = callingpoint.firstChildElement("lt:st");
+            QDomElement at = callingpoint.firstChildElement("lt:at");
 
             CallingPointObject cp(locationName.text(),crs.text(),st.text(),at.text());
             m_previousCallingPoints.append(cp);
@@ -183,10 +183,10 @@ void NetworkRequest::processServiceIDReply(){
         for (int i = 0; i < subsequentCallingPointsList.size(); i++) {
             QDomNode callingpoint = subsequentCallingPointsList.at(i);
 
-            QDomElement locationName = callingpoint.firstChildElement("locationName");
-            QDomElement crs = callingpoint.firstChildElement("crs");
-            QDomElement st = callingpoint.firstChildElement("st");
-            QDomElement at = callingpoint.firstChildElement("at");
+            QDomElement locationName = callingpoint.firstChildElement("lt:locationName");
+            QDomElement crs = callingpoint.firstChildElement("lt:crs");
+            QDomElement st = callingpoint.firstChildElement("lt:st");
+            QDomElement at = callingpoint.firstChildElement("lt:at");
 
             CallingPointObject cp(locationName.text(),crs.text(),st.text(),at.text());
             m_subsequentCallingPoints.append(cp);

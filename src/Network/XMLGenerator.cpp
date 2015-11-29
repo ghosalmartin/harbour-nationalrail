@@ -16,7 +16,7 @@ QByteArray XMLGenerator::createOperationXML(QString operation,int numRows, QStri
     writer.writeStartDocument("1.0");
     writer.writeStartElement("SOAP-ENV:Envelope");
     writer.writeNamespace("http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV");
-    writer.writeNamespace("http://thalesgroup.com/RTTI/2014-02-20/ldb/","ns1");
+    writer.writeNamespace("http://thalesgroup.com/RTTI/2015-05-14/ldb/","ns1");
     writer.writeNamespace("http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes","ns2");
 
     writer.writeStartElement("SOAP-ENV:Header");
@@ -74,7 +74,7 @@ QByteArray XMLGenerator::createServiceDetailXML(QString serviceID){
     writer.writeStartDocument("1.0");
     writer.writeStartElement("SOAP-ENV:Envelope");
     writer.writeNamespace("http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV");
-    writer.writeNamespace("http://thalesgroup.com/RTTI/2014-02-20/ldb/","ns1");
+    writer.writeNamespace("http://thalesgroup.com/RTTI/2015-05-14/ldb/","ns1");
     writer.writeNamespace("http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes","ns2");
 
     writer.writeStartElement("SOAP-ENV:Header");

@@ -7,8 +7,12 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
-
+* Sun Nov 29 2015 Martin Ghosal <martin_ghosal@hotmail.co.uk> 0.1.5
+- Updated API to new version
+* Mon Oct 5 2015 Martin Ghosal <martin_ghosal@hotmail.co.uk> 0.1.4
+- Moved database files to .config
 * Sun Apr 13 2014 Martin Ghosal <martin_ghosal@hotmail.co.uk> 0.1.1
 - Emitted datachanged when tapping on star to ensure the model is updated.
+
 
 

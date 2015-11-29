@@ -65,8 +65,8 @@ int main(int argc, char *argv[])
 
     QDir appDir(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation).back());
     QString dbName = "stationsDB.sqlite";
-    QString dbFolder = ".config"+ QDir::separator() + app->applicationName();
-
+    QString dbFolder = ".config" + QString(QDir::separator()) + app->applicationName();
+    qDebug() << dbFolder;
 
     if(!QFile::exists(QDir::homePath()+QDir::separator()+dbFolder+QDir::separator()+dbName)){
         QDir dir;

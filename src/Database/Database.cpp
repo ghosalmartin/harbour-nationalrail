@@ -2,7 +2,7 @@
 
 #include <QDir>
 
-QString const databaseFolder =".harbour-nationalrail";
+QString const databaseFolder ="harbour-nationalrail";
 QString const databaseName ="stationsDB.sqlite";
 
 Database::Database()
@@ -21,8 +21,7 @@ bool Database::openDB()
     db = QSqlDatabase::addDatabase("QSQLITE","stationsDB");
 
 
-    QString databasePath = QDir::homePath() + QDir::separator()+ databaseFolder + QDir::separator()+ databaseName;
-
+    QString databasePath = QDir::homePath() + QDir::separator()+ ".config" + QDir::separator() + databaseFolder + QDir::separator()+ databaseName;
     db.setDatabaseName(databasePath);
 
     return db.open();
