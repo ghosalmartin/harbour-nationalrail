@@ -1,4 +1,4 @@
-#include "serviceobject.h"
+#include "ServiceObject.h"
 
 ServiceObject::ServiceObject(QString stationName, QString stationCRS,QString destination, QString destinationCRS, QString departureTime, QString amendedDepartureTime, QString arrivalTime, QString amendedArrivalTime, QString platform, QString trainOperator, QString trainOperatorCode, QString serviceID)
 {

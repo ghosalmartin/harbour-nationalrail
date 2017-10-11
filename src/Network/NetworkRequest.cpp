@@ -47,7 +47,7 @@ void NetworkRequest::XYZReplyFinished(QNetworkReply *reply){
     if (reply->error() == QNetworkReply::NoError) {
         xmlDoc.setContent(reply->readAll(),0,0,0,0);
         delete reply;
-        //qDebug() << xmlDoc.toString(1);
+        qDebug() << xmlDoc.toString(1);
         eventLoop.exit(0);
         processXYZReply();
     }
@@ -63,12 +63,12 @@ void NetworkRequest::processXYZReply(){
 
     m_services.clear();
 
-    QDomNodeList messages = xmlDoc.elementsByTagName("nrccMessages");
+    QDomNodeList messages = xmlDoc.elementsByTagName("lt3:nrccMessages");
 
     if(messages.length() !=0){
         for (int i = 0; i < messages.size(); i++) {
             QDomNode messageNode = messages.item(i);
-            QDomElement element = messageNode.firstChildElement("message");
+            QDomElement element = messageNode.firstChildElement("lt:message");
             MessageObject message(element.text());
             m_messages.append(message);
         }

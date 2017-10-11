@@ -1,4 +1,4 @@
-#include "servicemodel.h"
+#include "ServiceModel.h"
 #include <QListIterator>
 #include <QDebug>
 
