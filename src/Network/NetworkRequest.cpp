@@ -62,6 +62,7 @@ void NetworkRequest::XYZReplyFinished(QNetworkReply *reply){
 void NetworkRequest::processXYZReply(){
 
     m_services.clear();
+    m_messages.clear();
 
     QDomNodeList messages = xmlDoc.elementsByTagName("lt3:nrccMessages");
 
